@@ -53,7 +53,6 @@ def nifti_to_jpg(path, filename, slice_dim, save_folder):
     plt.legend(('cdf', 'histogram'), loc='upper left')
     plt.show()
 
-
     # save new image
     filename_new = filename.split('.')[0] + "-" + str(slice_dim) + "-" + save_folder
     save_path = os.path.join('data', save_folder, filename_new)
@@ -61,11 +60,10 @@ def nifti_to_jpg(path, filename, slice_dim, save_folder):
     return
 
 
-def extract_multiple():
+def extract_multiple(path):
     """
     Extract 2D image from every 3D image in some folder
     """
-    path = os.path.join(os.getcwd(), 'data\\ixi2')
     files = os.listdir(path)
     # fitting dimensions for ixi2 dataset around 65-80
     slice_dim = 75
@@ -95,7 +93,6 @@ def resize(path, save_path):
     """
     Resize images
     """
-
     files = os.listdir(path)
     size = (32, 32)
     for filename in files:
@@ -106,12 +103,10 @@ def resize(path, save_path):
     return
 
 
-def crop_images():
+def crop_images(path, save_path):
     """
     Cut black regions on the sides of the image
     """
-    path = os.path.join(os.getcwd(), 'data\\ixi\\ixi-prepared')
-    save_path = os.path.join(os.getcwd(), 'data\\ixi_jpg\\MRI\\yes')
     files = os.listdir(path)
 
     for filename in files:
@@ -137,7 +132,6 @@ def rotate(path, save_path):
     """
     Rotate images
     """
-
     files = os.listdir(path)
     for filename in files:
         img = cv2.imread(os.path.join(path, filename), cv2.IMREAD_GRAYSCALE)
@@ -154,7 +148,6 @@ def create_set(path, save_path, size=500):
     @params:
         size: Size of a new set
     """
-
     files = os.listdir(path)
     random.shuffle(files)
     for filename in files:
@@ -172,7 +165,6 @@ def create_sets(percentage=0.9):
     @params:
         percentage: Percentage of training set
     """
-
     # randomly divide images from training+test folder in test and training sets
     path = os.path.join(os.getcwd(), 'data\\training+test')
     path_test = os.path.join(os.getcwd(), 'data\\test')
@@ -198,7 +190,6 @@ def normalize(path, save_path):
     """
     Normalize images, adjust pixel distribution
     """
-
     files = os.listdir(path)
 
     for filename in files:
@@ -207,15 +198,4 @@ def normalize(path, save_path):
         cv2.imwrite(os.path.join(save_path, "n" + filename), result)
 
     return
-
-
-# processing
-nifti_to_jpg("E:\\study\\MasterCourses\\BigDataBioinf\\image_generation_minGPT\\data\\ixi2", "IXI180-HH-1605-T2.nii.gz", 70, "test")
-#crop_images()
-#process_multiple()
-#resize(path=os.path.join(os.getcwd(), 'data\\kaggle\\yes-normalized'), save_path=os.path.join(os.getcwd(), 'data\\kaggle\\yes-prepared'))
-#rotate(path=os.path.join(os.getcwd(), 'data\\kaggle\\yes-prepared'), save_path=os.path.join(os.getcwd(), 'data\\kaggle\\yes-prepared'))
-#create_set(path=os.path.join(os.getcwd(), 'data\\ixi\\ixi-prepared'), save_path=os.path.join(os.getcwd(), 'data\\training+test'), size=1000)
-#create_sets(percentage=0.9)
-#normalize(path= , save_path=)
 
