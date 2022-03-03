@@ -38,32 +38,3 @@ class BrainDataset(Dataset):
         flattened = flattened.long()
         return flattened[:-1], flattened[1:]
 
-
-
-
-
-
-
-
-
-# print("brain_dataset[0]:   ")
-# print(self.brain_dataset[0])
-# print(len(self.brain_dataset[0]))
-
-# x,y = self.brain_dataset[0]
-# x = torch.from_numpy(np.array(x)).view(-1, 1)
-# x = x.int()
-# data_tensor = torch.from_numpy(x)
-# print("sata tensor: ")
-# print(data_tensor)
-# print("x:")
-# print(x[0])
-# print("y:")
-# print(y)
-
-# z = x[:-1]
-# zz = x[1:]
-# print("x[:-1]: ")
-# print(z)
-# print("x[1:]: ")
-# print(zz)
